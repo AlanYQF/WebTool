@@ -1,0 +1,5 @@
+//字体大小自适应
+var htmlDom = document.documentElement;
+var windowWidth = htmlDom.clientWidth;
+var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+htmlDom.style.fontSize = windowWidth / 7.5 + 'px';
