@@ -68,3 +68,25 @@ document.body.addEventListener('touchmove', function(evt) {
 		evt.preventDefault();
 	}
 });
+
+//判断是不是手机端
+var isMobile = {
+Android: function () {
+    return navigator.userAgent.match(/Android/i) ? true : false;
+},
+BlackBerry: function () {
+    return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+},
+iOS: function () {
+    return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+},
+Windows: function () {
+    return navigator.userAgent.match(/IEMobile/i) ? true : false;
+},
+any: function () {
+    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+}
+};
+if (isMobile.any()) {
+//如果是手机访问的话的操作！
+}
