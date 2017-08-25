@@ -1,0 +1,16 @@
+//数组去重方法
+var arrlength=arrpro.match(/[A-Z0-9]/g);
+var j=0;
+if(arrlength!=null){
+  for(var i=1;i<arrlength.length;i++){
+    if(arrlength[j]==arrlength[i]){
+      arrlength.splice(j,1)									
+      j++;
+    }	
+  }	
+  //字母替换方法
+  arrlength.forEach(function(e){
+    punctuations_pro=punctuations_new.replace(eval("/("+e+")/g"),"<span>"+e+"</span>");
+    punctuations_new=punctuations_pro;
+  })
+}
