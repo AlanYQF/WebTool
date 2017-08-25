@@ -14,3 +14,33 @@ if(arrlength!=null){
     punctuations_new=punctuations_pro;
   })
 }
+
+// 判断是否来自微信浏览器
+var isWeiXin = function() {
+	var ua = window.navigator.userAgent.toLowerCase();
+	console.log(ua); //mozilla/5.0 (iphone; cpu iphone os 9_1 like mac os x) applewebkit/601.1.46 (khtml, like gecko)version/9.0 mobile/13b143 safari/601.1
+	if(ua.match(/MicroMessenger/i) == 'micromessenger') {
+		return true;
+	} else {
+		return false;
+	}
+};
+var onVisibilityChanged = function() {
+	if(!isWeiXin()) {
+		console.log("不是来自微信内置浏览器");
+		var visitState = document.visibilityState;
+		var needReloadWhenShow = localStorage.getItem('need_reload_when_show');
+		if((!visitState || visitState == 'visible') && needReloadWhenShow == 1) {
+			localStorage.setItem('need_reload_when_show', '0');
+			var href = location.pathname;
+			if(href) {
+				location.replace(href + '?' + new Date().getTime());
+			} else {
+				location.reload(true);
+			}
+		}
+	}
+};
+// 用户退到后台或从后台返回触发
+document.addEventListener("webkitvisibilitychange", onVisibilityChanged, false);
+document.addEventListener("visibilitychange", onVisibilityChanged, false);
