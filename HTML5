@@ -3,3 +3,15 @@ myVid=document.getElementById("vidioss");
 myVid.oncanplay=function(){
 	console.log($(this).get(0).duration)
 };
+
+//ios微信自动播放启动
+function onBridgeReady(){    
+    WeixinJSBridge.invoke('getNetworkType', {}, function (e) {    
+        document.getElementById('vidioss').play();  
+    });    
+}  
+if (typeof WeixinJSBridge === "undefined"){  
+    document.addEventListener("WeixinJSBridgeReady", onBridgeReady , false);      
+}else{  
+    onBridgeReady();  
+}
