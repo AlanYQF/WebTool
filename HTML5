@@ -1,0 +1,5 @@
+//获取video播放总时间
+myVid=document.getElementById("vidioss");
+myVid.oncanplay=function(){
+	console.log($(this).get(0).duration)
+};
