@@ -1,0 +1,142 @@
+<html>
+  <head>
+    <title>moveico</title>
+    <style>
+    		.moveico{
+          display: none;
+          z-index: 99999999999;
+          top: 0px;
+          width: 50px;
+          height: 50px;
+          position: fixed;
+          background-image: url(/Public/home/images/moveico.png);
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: 100%;
+          border: 2px solid rgba(129,146,214,.3);
+          border-radius: 50%;
+        }
+        .moveicobg{
+          display: none;
+          z-index: 9999;
+          top: 0px;
+          left: 0px;
+          right: 0px;
+          bottom: 0px;
+          position: fixed;
+          background-color: rgba(0,0,0,.6);
+        }
+        .leftcontentbox{
+          z-index: 99999;
+          top: 0px;
+          transition: .3s;
+          transform: translateX(-121%);
+          position: fixed;
+          height: 100%;
+          width: 80%;
+          color: #45a2e5;
+          background-color: #f4f9ff;
+        }
+        .leftcontentbox .lcbtitle{
+          position: relative;
+          height: 30%;
+          width: 100%;
+          border-bottom: 1px solid rgba(69,162,229,.3);	
+          font-size: 1.8em;
+        }
+        .leftcontentbox .lcbtitle p{
+          position: absolute;
+          bottom: 0px;
+          left: 20px;
+        }
+        .leftcontentbox .lcbbottom{
+          padding: 5%;
+          height: 70%;
+          width: 90%;
+          font-size: 1.1em;
+        }
+        .leftcontentbox .lcbbottom p{
+          margin: 10px 0;
+        }
+        .leftcontentbox .lcbbottom p span{
+          color: #cc4318;
+          float: right;
+        }
+        .leftcontentbox .rightico{
+          position: absolute;
+          right: -60px;
+          top: 45%;
+          width: 50px;
+          height: 50px;
+          background-image: url(/Public/home/images/xx.png);
+          background-position: 50%;
+          background-repeat: no-repeat;
+          background-size: 80%;
+          border: 2px solid #e6e6e6;
+          border-radius: 50%;
+          opacity: .8;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="moveico"></div>
+    <div class="leftcontentbox">
+      <div class="lcbtitle">
+        <p>活动推荐</p>
+      </div>
+      <div class="lcbbottom">
+        <p>推荐给好友领取书币<span class="friends">领取</span></p>
+        <p>推荐给群领取书币<span class="group">领取</span></p>
+      </div>
+      <div class="rightico"></div>
+    </div>
+    <div class="moveicobg"></div>
+  </body>
+</html>
+<script>
+  (function(){
+      var bodywidth=$(document).width()-25;
+      var bodyheight=$(window).height()-50;		
+      var widthico=0;
+      var heightico=0;
+      var leftboxpd;
+      $('.moveico').show();
+      $('.moveico').css('transform',"translateX("+bodywidth+"px)");
+      $('.moveico').on('touchstart',function(e){	
+        leftboxpd=true;
+        bodywidth=$('body').width()-50;
+        $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
+        $(this).css('border-color','rgba(129,146,214,.8)');					
+        $(this).on('touchmove',function(e){
+          leftboxpd=false;
+          widthico=(e.originalEvent.changedTouches[0].pageX)-($(this).width()/2);
+          heightico=(e.originalEvent.changedTouches[0].clientY)-($(this).height()/2);
+          $(this).css('transform','translateX('+widthico+'px) translateY('+heightico+'px)');
+          if(!e._isScroller) {
+            e.preventDefault();
+          }
+        })
+        $(this).on("touchend",function(){
+          if(leftboxpd){
+            $('.moveicobg').show();
+            $('.moveico').hide();
+            $('.leftcontentbox').css("transform",'translateX(0%)');
+          }				
+          if(heightico<0){
+            heightico=0;
+          }
+          if(heightico>bodyheight){
+            heightico=bodyheight;
+          }
+          bodywidth=$('body').width()-25;
+          $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
+          $(this).css('border-color','rgba(129,146,214,.3)');
+        })
+      })
+      $('.rightico').on('touchend',function(){
+        $('.leftcontentbox').css("transform",'translateX(-121%)');
+        $('.moveicobg').hide();
+        $('.moveico').show();
+      })		
+    })()
+  </script>
