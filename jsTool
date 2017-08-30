@@ -90,3 +90,9 @@ any: function () {
 if (isMobile.any()) {
 //如果是手机访问的话的操作！
 }
+
+//js原型链继承
+var func=function(){};
+var obj=new func();
+//函数原型的构造函数完全等于对象原的构造函数
+func.prototype.constructor===obj.__proto__.constructor;
