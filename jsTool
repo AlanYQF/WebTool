@@ -96,3 +96,5 @@ var func=function(){};
 var obj=new func();
 //函数原型的构造函数完全等于对象原的构造函数
 func.prototype.constructor===obj.__proto__.constructor;
+//函数原型的构造函数完全等于本身
+func.prototype.constructor===func;
