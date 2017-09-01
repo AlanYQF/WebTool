@@ -98,3 +98,6 @@ var obj=new func();
 func.prototype.constructor===obj.__proto__.constructor;
 //函数原型的构造函数完全等于本身
 func.prototype.constructor===func;
+
+//干预：阻止跨2G的负载，通过document.write插入的解析器阻塞脚本给2G用户
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260553427'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260553427' type='text/javascript'%3E%3C/script%3E"));</script>
