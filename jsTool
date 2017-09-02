@@ -101,3 +101,21 @@ func.prototype.constructor===func;
 
 //干预：阻止跨2G的负载，通过document.write插入的解析器阻塞脚本给2G用户
 <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1260553427'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1260553427' type='text/javascript'%3E%3C/script%3E"));</script>
+
+//上传图片缩略图
+function getObjectURL(file) {
+	var url = null;
+	if(window.createObjectURL != undefined) { // basic
+		url = window.createObjectURL(file);
+	} else if(window.URL != undefined) { // mozilla(firefox)
+		url = window.URL.createObjectURL(file);
+	} else if(window.webkitURL != undefined) { // webkit or chrome
+		url = window.webkitURL.createObjectURL(file);
+	}
+	return url;
+}
+$('#thumbnail').change(function() {
+	var eImg = $('<img />');
+	eImg.attr('src', getObjectURL($(this)[0].files[0])); // 或 this.files[0] this->input
+	$(this).after(eImg);
+});
