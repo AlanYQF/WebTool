@@ -1,15 +1,20 @@
 //数组去重方法
-var arrlength=arrpro.match(/[A-Z0-9]/g);
-var j=0;
+var punctuations_new=$('.textss').text();
+var arrlength=punctuations_new.match(/[^\u4e00-\u9fa5]/g);
 if(arrlength!=null){
-  for(var i=1;i<arrlength.length;i++){
-    if(arrlength[j]==arrlength[i]){
-      arrlength.splice(j,1)									
-      j++;
-    }	
-  }	
+	for(let i=-1;i<arrlength.length;i++){
+		for(let j=0;j<i;j++){
+			if(arrlength[i]==arrlength[j]){
+				arrlength.splice(i,1);
+				i=-1;
+				j=0;
+			}
+		}				
+	}			
+	console.log(arrlength)
+}	
   //字母替换方法
-  arrlength.forEach(function(e){
+arrlength.forEach(function(e){
     punctuations_pro=punctuations_new.replace(eval("/("+e+")/g"),"<span>"+e+"</span>");
     punctuations_new=punctuations_pro;
   })
