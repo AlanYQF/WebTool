@@ -74,6 +74,11 @@ document.body.addEventListener('touchmove', function(evt) {
 	}
 });
 
+//开启移动端上下移动
+document.addEventListener('touchmove', function (e) {
+	e.returnValue = true;
+}, false);
+
 //判断是不是手机端
 var isMobile = {
 Android: function () {
