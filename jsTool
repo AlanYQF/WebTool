@@ -124,3 +124,16 @@ $('#thumbnail').change(function() {
 	eImg.attr('src', getObjectURL($(this)[0].files[0])); // 或 this.files[0] this->input
 	$(this).after(eImg);
 });
+
+//定义$
+var $ = function(selector) {
+	return document.querySelector(selector);
+};
+
+//js定义css前缀
+var $css3Transform = function(element, value) {
+var arrPriex = ["O", "Ms", "Moz", "Webkit", ""], length = arrPriex.length;
+for (var i=0; i < length; i+=1) {
+    element.style[arrPriex[i] + "Transform"] = value;
+}
+};
