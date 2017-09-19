@@ -1,0 +1,31 @@
+//CSS
+*{padding: 0;margin: 0;}
+.textbox{
+  position: relative;
+  overflow: hidden;
+}
+.textfont{
+  column-gap: 20px;
+  position: absolute;	
+  font-size: 20px;
+}
+
+//DIV
+<div class="textbox">
+  <div class="textfont">
+    <h3>第二章 元能点（下）</h3><p>　　“元能：0.1！？”</p><p>　　方成瞪大眼睛，似乎怀疑自己眼花，出现了幻觉。</p><p>　　视野下方的符号竟然有所变化！</p><p>　　这是什么情况？</p><p>　　方成愣住了，心里一片混乱。</p><p>　　“我得先离开这里。”</p><p>　　方成镇定心神，向四周观望了一圈，急忙扔下染着血迹的砖头，向学校门口疾步走去。</p><p>　　不行！</p><p>　　走了几步的方成停顿了一下，又转身走了回来，捡起砖头。</p><p>　　“得把这个砖头扔掉。”</p><p>　　方成左手拿起砖头，走了几百米，扔到一个垃圾箱中。</p><p>　　走回宿舍，宿舍楼正门口摆放的桌子上，赫然摆放着几本签到表。</p><p>　　方成熟练的拿起一旁的黑色碳素笔，写上自己和韩文石的名字，迈步走了进去。</p><p>　　宿舍在三楼。</p><p>　　方成一步两个楼梯阶，走上三楼站定，伸手在裤兜里掏出钥匙，打开门走了进去。</p><p>　　“呼。”</p><p>　　直到这时方成才稍微放松下来。</p><p>　　从宿舍客厅打开小室的门，一个宿舍进去先是客厅，然后右侧两个门分别是一间小室，每室四个人。</p><p>　　“哟，回来了。”</p><p>　　张途正在坐在床上，面对着门口打游戏，见方成回来道了一声，“黄秀光出去玩了，晚上不回来。”</p><p>　　黄秀光是另一个舍友，云海本地人，家里条件好，平时很少和宿舍里的人说话，比较傲气。</p><p>　　张途对黄秀光很热情，两个人走得比较近。</p><p>　　“恩，你在打游戏啊？”方成应了一声。</p><p>　　“是啊。”</p><p>　　张途说了一句，就集中精神打游戏，团战不能分心。</p><p>　　四人寝室，上床下桌是惯例。</p><p>　　方成爬到上铺，坐在自己的床上，目光闪动呆呆的看着对面杂乱的桌子，那是韩文石的。</p><p>　　“力量：0.6，敏捷：0.5，精神：0.8，元能：0.1。”</p><p>　　这是什么？</p></div>
+  </div>
+</div>
+
+//JS
+$('.textbox').width($(document).width());
+$('.textbox').height($(document).height());
+var lenth=$(document).width()+20;
+$('.textfont').css({
+  height:$(document).height(),
+  'column-width':lenth
+})		
+$(document).click(()=>{
+  $('.textfont').css('transform',"translate3D("+-lenth+"px,0px,0px)");
+})		
+console.log(document.getElementsByClassName('textfont')[0].scrollWidth);
