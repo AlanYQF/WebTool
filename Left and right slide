@@ -1,0 +1,75 @@
+//CSS
+<style type="text/css">
+  *{margin: 0;padding: 0;}
+  .bannerbox{
+    height: 320px;
+    width: calc(100% - 20px);
+    margin: 10px;
+    overflow: hidden;
+  }
+  .bannerbox .imgbox{
+    transition: .1s ease-out;
+    transform: translate3D(0,0,0);
+    width: 999999px;
+    height: 100%;
+  }
+  .bannerbox .imgbox .imgboxs{
+    float: left;
+    height: 100%;
+  }
+  .bannerbox .imgbox .imgboxs img{
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+//HTML
+<div class="bannerbox">
+  <div class="imgbox">
+    <div class="imgboxs">
+      <img src="img/background.jpg"/>
+    </div>
+    <div class="imgboxs">
+      <img src="img/titlebg.jpg"/>
+    </div>
+    <div class="imgboxs">
+      <img src="img/coupon_send_sprites-44b024023a.png"/>
+    </div>
+    <div class="imgboxs">
+      <img src="img/mode1.jpg"/>
+    </div>
+  </div>
+</div>
+
+//JS
+<script type="text/javascript">
+  $(()=>{
+    let imgwidth=$('.bannerbox').width();
+    $('.imgboxs').width(imgwidth);
+    let startX;
+    let moveX;
+    let endX;
+    let widthX=imgwidth/2;
+    let total=0;
+    $('.imgbox').on('touchstart',function(e){
+      startX=e.originalEvent.changedTouches[0].pageX;
+    })
+    $('.imgbox').on('touchmove',function(e){
+      moveX=e.originalEvent.changedTouches[0].pageX;
+      endX=moveX-startX;
+      $(this).css('transform',`translate3D(${endX-total}px,0,0)`);
+    })
+    $('.imgbox').on('touchend',function(e){
+      if(endX<=-widthX){
+        total+=imgwidth;
+        $(this).css('transform',`translate3D(${-total}px,0,0)`);
+      }
+      else if(endX>=widthX){
+        total-=imgwidth;
+        $(this).css('transform',`translate3D(${-total}px,0,0)`);
+      }else{
+        $(this).css('transform',`translate3D(${-total}px,0,0)`);
+      }				
+    })
+  })
+</script>
