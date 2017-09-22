@@ -94,18 +94,23 @@
   </body>
 </html>
 <script>
-  (function(){
-      var bodywidth=$(document).width()-25;
-      var bodyheight=$(window).height()-50;		
-      var widthico=0;
-      var heightico=0;
-      var leftboxpd;
-      $('.moveico').show();
-      $('.moveico').css('transform',"translateX("+bodywidth+"px)");
-      $('.moveico').on('touchstart',function(e){	
+(function(){
+    var bodywidth=$(document).width()-25;
+    var bodyheight=$(window).height()-50;		
+    var widthico=0;
+    var heightico=0;
+    var leftboxpd;
+    $('.moveico').show();
+    $('.moveico').css('transform',"translateX("+bodywidth+"px)");
+    $('.moveico').on('touchstart',function(e){	
         leftboxpd=true;
-        bodywidth=$('body').width()-50;
-        $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
+        if($(this).css("transform").split(',')[4]>$('body').width()/2){
+      bodywidth=$('body').width()-50;
+          $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
+    }else{
+      bodywidth=0;
+      $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
+    }       
         $(this).css('border-color','rgba(129,146,214,.8)');					
         $(this).on('touchmove',function(e){
           leftboxpd=false;
@@ -119,24 +124,28 @@
         $(this).on("touchend",function(){
           if(leftboxpd){
             $('.moveicobg').show();
-            $('.moveico').hide();
-            $('.leftcontentbox').css("transform",'translateX(0%)');
+              $('.moveico').hide();
+              $('.leftcontentbox').css("transform",'translateX(0%)');
           }				
           if(heightico<0){
-            heightico=0;
+              heightico=0;
           }
           if(heightico>bodyheight){
-            heightico=bodyheight;
+              heightico=bodyheight;
           }
-          bodywidth=$('body').width()-25;
+          if(widthico<=$('body').width()/2){
+              bodywidth=-25;
+          }else{
+              bodywidth=$('body').width()-25;
+          }
           $(this).css("transform","translateX("+bodywidth+"px) translateY("+heightico+"px)");
           $(this).css('border-color','rgba(129,146,214,.3)');
         })
-      })
-      $('.rightico').on('touchend',function(){
+    })
+    $('.rightico').on('touchend',function(){
         $('.leftcontentbox').css("transform",'translateX(-121%)');
         $('.moveicobg').hide();
         $('.moveico').show();
-      })		
-    })()
-  </script>
+    })		
+  })()
+</script>
