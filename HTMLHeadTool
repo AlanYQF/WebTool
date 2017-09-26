@@ -27,5 +27,9 @@
     <!-- QQ强制竖屏 -->
     <meta name="format-detection" content="telephone=no" />
     <!-- 去除苹果浏览器自带link -->
+    <link rel="dns-prefetch" href="//cj.qirexiaoshuo.com" />
+    <!-- 添加dns预存 -->
+    <link rel="canonical" href="//baidu.com/" />
+    <!-- 指定网页http://www.baidu.com/为搜索引擎应收录的链接（规范链接） -->
   </head>
 </html>
