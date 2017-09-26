@@ -15,3 +15,30 @@ if (typeof WeixinJSBridge === "undefined"){
 }else{  
     onBridgeReady();  
 }
+
+//播放器进度条控制
+$(".progressWrapper").click(function (e) {
+        var widths=$(this).width()/100;
+        var pagexs=e.pageX-$(this).offset().left;
+        tt=pagexs/widths;
+        myVidss.currentTime=myVidss.duration*(tt/100);
+        $('#audioInfo')[0].play();
+        $("#playButton").css("background-image","url('/Public/home/img/stopss.png')");
+        timejindus();
+})
+function timejindus() {
+	timejindu=setInterval(function () {
+	    myVidss=document.getElementById("audioInfo");
+	    tt =myVidss.currentTime;
+	    jindut=tt/(myVidss.duration/100);
+	    timess =  Math.floor(tt/60)+":"+(tt%60/100).toFixed(2).slice(-2);
+	    $(".timeBall").css("left",jindut+"%")
+	    $(".runTime").text(timess)
+	    $(".timeLine").css("width",jindut+"%")
+	    if(tt>=myVidss.duration){
+		myVidss.pause();
+		$("#playButton").css("background-image","url('/Public/home/img/playss.png')");
+		return false;
+	    }
+	},1000)
+}
