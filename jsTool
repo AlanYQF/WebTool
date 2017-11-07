@@ -148,3 +148,24 @@ let degs=90*Math.PI/180;
 let cosα=Math.cos(degs);
 let sinα=Math.sin(degs);
 $('.matrix').css('transform',`matrix(${cosα.toFixed(6)},${sinα.toFixed(6)},${-sinα.toFixed(6)},${cosα.toFixed(6)},50,50)`);
+
+//阻止微信下拉显示域名
+var movestart,movestop;
+var panduan;
+$(document).on('touchstart',(event)=>{
+	movestart=event.originalEvent.changedTouches[0].screenY;
+})
+$(document).on('touchmove',(event)=>{
+	movestop=event.originalEvent.changedTouches[0].screenY-movestart;
+	if(movestop>=0&&$(this).scrollTop()==0){
+		panduan=true;
+	}
+	if(panduan){
+		$('.scroll').css('transform',`translate3D(0,${movestop}px,0)`);
+		event.preventDefault();
+		$(document).on('touchend',(event)=>{
+			$('.scroll').css('transform','translate3D(0,0,0)');
+			panduan=false;
+		})
+	}
+})
