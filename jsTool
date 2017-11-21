@@ -169,3 +169,12 @@ $(document).on('touchmove',(event)=>{
 		})
 	}
 })
+
+//js跨域通讯
+(iframe父容器)
+window.addEventListener('message',function(e){
+	console.log(e.data)
+},false);
+
+(iframe子容器)
+window.parent.postMessage(masege, "*");
