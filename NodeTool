@@ -1,0 +1,60 @@
+//node实时通讯
+(服务端)
+//服务器及页面部分
+var express = require('express'),
+    app = express(),
+    server = require('http').createServer(app),
+    io = require('socket.io').listen(server)   
+app.get('/', function (req, res) {
+    // 使用了superagent来发起请求
+    var superagent = require('superagent');
+    // 查询本机ip，这里需要根据实际情况选择get还是post
+    var sreq = superagent.get('192.168.253.128/indexs.html');
+    sreq.pipe(res);
+    sreq.on('end', function(){
+        console.log('ok');
+    });    
+});    
+app.use('/', express.static(__dirname + '/'));
+server.listen(8888);
+//socket部分
+io.on('connection', function(socket) {
+	//接收新消息
+    socket.on('postMsg', function(msg) {
+        //将消息发送到所有用户
+        io.sockets.emit('newmsg',msg);
+    });
+});
+
+(客户端)
+<script src="http://onlinetk.double-life.top/node_modules/socket.io-client/dist/socket.io.js"></script>
+window.onload = function() {
+    var hichat = new HiChat();
+    hichat.init();   
+};
+var HiChat = function() {
+    this.socket = null;
+};
+HiChat.prototype = {
+    init: function() {
+        var that = this;
+        this.socket = io.connect();
+        this.socket.on('newmsg', function(msg) {
+            that._displayNewMsg(msg);
+        });
+        setInterval(function(){
+        	var msg = '&lt;a href=&quot;http://www.baidu.com&quot;&gt;&lt;/a&gt;';
+            if (msg.trim().length != 0) {
+                that.socket.emit('postMsg', msg);
+                return;
+            };
+        },5000)
+    },
+    _displayNewMsg: function(msg) {
+        document.getElementById('newmsg').innerText=msg;
+        document.getElementsByClassName('topboxs')[0].style.transform='translateY(0px)';
+        setTimeout(function(){
+        	document.getElementsByClassName('topboxs')[0].style.transform='translateY(-50px)';
+        },3000)
+    }
+};
