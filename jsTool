@@ -178,3 +178,21 @@ window.addEventListener('message',function(e){
 
 (iframe子容器)
 window.parent.postMessage(masege, "*");
+
+//原生ajax
+function post(url, data, fn) {
+var obj = new XMLHttpRequest();
+obj.open("POST", url, true);
+obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//	obj.onreadystatechange = function() {
+//	if (obj.readyState == 4 && (obj.status == 200 || obj.status == 304)) {  // 304未修改
+//		fn.call(this, obj.responseText);
+//	}
+};
+	datas={
+		nums:data
+	}
+	datas=JSON.stringify(datas);
+	obj.send(datas);
+}
+post('http://192.168.0.101:3000/123?id=123',nums.value);
