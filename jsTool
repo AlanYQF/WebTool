@@ -196,3 +196,13 @@ obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	obj.send(datas);
 }
 post('http://192.168.0.101:3000/123?id=123',nums.value);
+
+//只能输入数字和2位小数(正则表达式)
+function clearNoNum(obj)
+{
+　　obj.value = obj.value.replace(/[^\d.]/g,""); //清除“数字”和“.”以外的字符
+　　obj.value = obj.value.replace(/^\./g,""); //验证第一个字符是数字而不是.
+　　obj.value = obj.value.replace(/\.{2,}/g,"."); //只保留第一个. 清除多余的
+　　obj.value = obj.value.replace(".","$#$").replace(/\./g,"").replace("$#$",".");
+　　obj.value=obj.value.replace(/^(\-)*(\d+)\.(\d\d).*$/,'$1$2.$3');//只能输入两个小数
+}
