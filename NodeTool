@@ -104,3 +104,26 @@ var server = app.listen(3000, function() {
 	var port = server.address().port;
 	console.log('Example app listening at http://%s:%s', host, port);
 })
+//多进程以及多进程之间的通讯
+//主进程
+var process=require('child_process');
+var fork=process.fork;
+var cpus=require('os').cpus();
+//var msg=process.fork(__dirname+'/serverffmpeg.js');
+//msg.on('message',function(e){
+//	console.log(e);
+//})
+for (var i=0;i<cpus.length;i++) {
+//	msg.send(i);
+	fork(`./serverffmpeg${i}.js`);
+}
+//子进程
+var http=require('http');
+//process.on('message',function(e){
+//	console.log(e);
+//})
+http.createServer(function(req,res){
+	res.writeHead(200,{'Content-Type':'text/plain'});
+	res.end('Hello');
+}).listen(Math.round((1+Math.random())*1000),'127.0.0.1');
+
