@@ -193,6 +193,7 @@ obj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		nums:data
 	}
 	datas=JSON.stringify(datas);
+//	var data="parentId=0";
 	obj.send(datas);
 }
 post('http://192.168.0.101:3000/123?id=123',nums.value);
