@@ -300,3 +300,20 @@ function POST(url, options) {
 //请求方式选择
 GET('https://www.baidu.com/search/error.html', {a:1,b:2})
 POST('https://www.baidu.com/search/error.html', {a:1,b:2})
+
+//小程序接口请求封装
+this.requests = (resolve,url,types,data)=>{
+	wx.request({
+	url: this.conf.host + url,
+	method: types,
+	data: data,
+	success: res => {
+	  resolve(res.data)
+	}
+	})
+}
+new Promise(resolve=>{
+	app.requests(resolve,'/Miniapp/redpacket/CommonProblem', 'GET', { login_key: login_key });
+}).then(res=>{
+	console.log(res);
+});
