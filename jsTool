@@ -323,7 +323,27 @@ new Promise(resolve=>{
 var absdisX = Math.abs(disX);
 var disY = this.touchStartY - this.touchEndY;
 var absdisY = Math.abs(disY);  
-
 // 确定移动方向
 // 0:上, 1:右, 2:下, 3:左
 var direction = absdisX > absdisY ? (disX < 0 ? 1 : 3) : (disY < 0 ? 2 : 0); 
+formList(dir) {  // 根据传入的滑动方向生成list的四个数组
+    var list = [[], [], [], []];
+    for(var i = 0; i < this.size; i++)
+      for(var j = 0; j < this.size; j++) {
+        switch(dir) {
+          case 0:
+            list[i].push(this.board.grid[j][i]);
+            break;
+          case 1:
+            list[i].push(this.board.grid[i][this.size-1-j]);
+            break;
+          case 2:
+            list[i].push(this.board.grid[this.size-1-j][i]);
+            break;
+          case 3:
+            list[i].push(this.board.grid[i][j]);
+            break;
+        }
+      }
+    return list;
+  }
