@@ -357,3 +357,21 @@ changeItem(item) {  // 将 [0, 2, 0, 2] 改为 [2, 2, 0, 0]
       item[j] = 0;
     return item;
   }
+//将相同值的单元格加起来，并将后面的一个单元格值变为0
+combine(list) { // 滑动时相同的合并
+    for(var i = 0; i < list.length; i++)  // 数字靠边
+      list[i] = this.changeItem(list[i]);
+
+    for(var i = 0; i < this.size; i++) { 
+      for(var j = 1; j < this.size; j++) {
+        if(list[i][j-1] == list[i][j] && list[i][j]!=0) {
+          list[i][j-1] += list[i][j];
+          list[i][j] = 0; 
+        }
+      }
+    }
+    for (var i = 0; i < list.length; i++)  // 再次数字靠边，避免0220变成0400的情况发生
+      list[i] = this.changeItem(list[i]);
+
+    return list;
+}
