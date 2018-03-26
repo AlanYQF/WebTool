@@ -347,3 +347,13 @@ formList(dir) {  // 根据传入的滑动方向生成list的四个数组
       }
     return list;
   }
+//将list的每一个小数组中的数字提到前面，0放到末尾
+changeItem(item) {  // 将 [0, 2, 0, 2] 改为 [2, 2, 0, 0]
+    var cnt = 0;
+    for(var i = 0; i < item.length; i++)
+      if(item[i] != 0)
+        item[cnt++] = item[i];
+    for(var j = cnt; j < item.length; j++) 
+      item[j] = 0;
+    return item;
+  }
