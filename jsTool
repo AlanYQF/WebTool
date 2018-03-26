@@ -317,3 +317,13 @@ new Promise(resolve=>{
 }).then(res=>{
 	console.log(res);
 });
+
+//判断用户滑动方向
+ var disX = this.touchStartX - this.touchEndX;
+var absdisX = Math.abs(disX);
+var disY = this.touchStartY - this.touchEndY;
+var absdisY = Math.abs(disY);  
+
+// 确定移动方向
+// 0:上, 1:右, 2:下, 3:左
+var direction = absdisX > absdisY ? (disX < 0 ? 1 : 3) : (disY < 0 ? 2 : 0); 
