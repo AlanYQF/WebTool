@@ -375,3 +375,16 @@ combine(list) { // 滑动时相同的合并
 
     return list;
 }
+
+//把图片处理成小图
+renderImg: function (image) {
+    var index = 0;
+    for (var i = 0; i < 3; i++) {
+	for (var j = 0; j < 3; j++) {
+	    this.context.drawImage(image, 300 * j, 300 * i, 300, 600, 0, 0, 300, 300);
+	    this.imgArr[index].src = this.canvas.toDataURL('image/jpeg');
+	    this.imgArr[index].id = index;
+	    index++;
+	}
+    }
+}
