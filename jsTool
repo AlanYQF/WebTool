@@ -388,3 +388,27 @@ renderImg: function (image) {
 	}
     }
 }
+//如何判断拼图是否完成
+isSuccess: function () {
+    var imgLikeArr = document.querySelectorAll('img'),
+	imgArr = Array.prototype.slice.call(imgLikeArr),
+	len = imgArr.length, i,
+	flag = true, self = this;
+     for (i = 0; i < len; i++) {
+	if (imgArr[i].id != i) {
+	    flag = false;
+	}
+    }
+
+    if (flag) {
+	setTimeout(function () {
+	   self.showtip();
+	}, 200);
+   }
+}
+//如何实现小图片随机排列
+randomImg: function () {
+    this.imgArr.sort(function () {
+	 return Math.random() - Math.random();
+     });
+}
