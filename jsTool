@@ -415,11 +415,11 @@ randomImg: function () {
 
 //打地鼠代码
 (wxml)
-<view class='cefiexd' wx:if='{{dkshow}}'>
-  <view class='cefiexd-box'>
+<view class='cefiexd' wx:if='{{dkshow}}' bindtap='guanbi'>
+  <view class='cefiexd-box' catchtap>
     <view class='cbox' wx:for='{{clickarrs}}'>
       <block wx:for='{{clickarrs[index]}}'>
-        <text class='clickbox' bindtap="{{item.length!=0?'clickdj':''}}">{{item}}</text>
+        <text class='clickbox' catchtap="{{item.length!=0?'clickdj':''}}">{{item}}</text>
       </block>      
     </view>
   </view>
@@ -504,6 +504,9 @@ arrfun:function(i){
       })
 }
 guanbi:function(){
+      this.setData({
+        dkshow:false
+      })
       this.data.clickarrs.forEach(res => {
         res.forEach(e => {
           e.length = 0;
