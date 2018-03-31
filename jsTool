@@ -476,8 +476,8 @@ band: function () {
         dkshow: true
       })
       this.arrfun(numsi)
-    },
-    clickdj:function(){
+},
+clickdj:function(){
       this.data.clickarrs.forEach(res=>{
         res.forEach(e=>{
           e.length = 0;
@@ -488,8 +488,8 @@ band: function () {
       if (numsi >= this.data.fonttexts.length){
         console.log('成功')
       }
-    },
-    arrfun:function(i){
+},
+arrfun:function(i){
       let numbers = Math.floor(Math.random(0, 1) * 6);
       let arrs = [];
       arrs = this.data.clickarrs;
@@ -502,4 +502,12 @@ band: function () {
       this.setData({
         clickarrs: arrs
       })
+}
+guanbi:function(){
+      this.data.clickarrs.forEach(res => {
+        res.forEach(e => {
+          e.length = 0;
+        })        
+      }) 
+      numsi = 0;
 }
