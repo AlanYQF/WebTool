@@ -412,3 +412,94 @@ randomImg: function () {
 	 return Math.random() - Math.random();
      });
 }
+
+//打地鼠代码
+(wxml)
+<view class='cefiexd' wx:if='{{dkshow}}'>
+  <view class='cefiexd-box'>
+    <view class='cbox' wx:for='{{clickarrs}}'>
+      <block wx:for='{{clickarrs[index]}}'>
+        <text class='clickbox' bindtap="{{item.length!=0?'clickdj':''}}">{{item}}</text>
+      </block>      
+    </view>
+  </view>
+</view>
+(wxss)
+.cefiexd{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, .5);
+}
+.cefiexd-box{
+  position: relative;
+  top: 30%;
+  width: 80%;
+  color: #555;
+  font-size: 35rpx;
+  margin: auto;
+  border-radius: 5rpx;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+}
+.cbox{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.clickbox{
+  text-align: center;
+  padding: 10%;
+  width: 33.3%;
+}
+(js)
+var numsi=0;
+data={
+	dkshow:false,
+        fonttexts:[],        
+        clickarrs:[
+          [
+            [],[],[]
+          ],[
+            [],[],[]
+          ]
+        ]
+}
+band: function () {        
+      this.setData({
+        dkshow: true
+      })
+      this.arrfun(numsi)
+    },
+    clickdj:function(){
+      this.data.clickarrs.forEach(res=>{
+        res.forEach(e=>{
+          e.length = 0;
+        })
+      })      
+      numsi++
+      this.arrfun(numsi);
+      if (numsi >= this.data.fonttexts.length){
+        console.log('成功')
+      }
+    },
+    arrfun:function(i){
+      let numbers = Math.floor(Math.random(0, 1) * 6);
+      let arrs = [];
+      arrs = this.data.clickarrs;
+      if (numbers <= 2) {
+        arrs[0][numbers] = [this.data.fonttexts[i]];
+      } else {
+        let numberss = numbers - this.data.clickarrs[0].length;
+        arrs[1][numberss] = [this.data.fonttexts[i]];
+      }
+      this.setData({
+        clickarrs: arrs
+      })
+}
