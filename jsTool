@@ -527,3 +527,25 @@ function getQueryVariable(variable) {
 	return(false);
 }
 getQueryVariable('id');
+//js转换时间格式
+this.fmtDate = (obj) => {
+      let date = new Date(obj);
+      let y = 1900 + date.getYear();
+      let m = "0" + (date.getMonth() + 1);
+      let d = "0" + date.getDate();
+      return y + "-" + m.substring(m.length - 2, m.length) + "-" + d.substring(d.length - 2, d.length);
+}
+//js换算时间
+let funs = (time, day, calculation) => {
+        let myDate;
+        if (time) {
+          myDate = new Date(time);
+        } else {
+          myDate = new Date();
+        }
+        let milliseconds = 1000 * 60 * 60 * 24 * day;
+        let millisecondsum;
+        calculation ? millisecondsum = myDate.getTime() + milliseconds : millisecondsum = myDate.getTime() - milliseconds;
+        let newDate = new Date(millisecondsum);
+        return app.fmtDate(newDate);
+}
