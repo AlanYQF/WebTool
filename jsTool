@@ -549,3 +549,29 @@ let funs = (time, day, calculation) => {
         let newDate = new Date(millisecondsum);
         return app.fmtDate(newDate);
 }
+//图片加水印
+const ctx = wx.createCanvasContext('myCanvas');
+wx.downloadFile({
+      url: 'https://koubeiayipublic-1256246102.cos.ap-shanghai.myqcloud.com/active.png',
+      success: resimg=> {        
+        ctx.drawImage(resimg.tempFilePath, 0, 0, 750, 5586)
+        ctx.drawImage('https://koubeiayipublic-1256246102.cos.ap-shanghai.myqcloud.com/images/wechats.png', 350, 4706, 50, 50)
+        ctx.draw(false, res => {
+          wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: 750,
+            height: 5586,
+            destWidth: 750,
+            destHeight: 5586,
+            canvasId: 'myCanvas',
+            success: res => {
+              this.setData({
+                imgs: res.tempFilePath,
+                canvas: false
+              })
+            }
+          })
+        })
+      }
+})
