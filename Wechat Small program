@@ -13,3 +13,55 @@ wx.chooseImage({
       })
     }
 })
+//微信小程序图片合成与保存
+const ctx = wx.createCanvasContext('myCanvas');
+wx.downloadFile({
+  url: 'https://koubeiayipublic-1256246102.cos.ap-shanghai.myqcloud.com/images/bbrzbg.png',
+  success: resimg=> {
+    wx.downloadFile({
+      url: 'https://koubeiayipublic-1256246102.cos.ap-shanghai.myqcloud.com/images/wechats.png',
+      success: resimgnext => {
+        ctx.drawImage(resimg.tempFilePath, 0, 0, 350, 150)
+        ctx.drawImage(resimgnext.tempFilePath, 50, 70, 50, 50)
+        ctx.draw(false, res => {
+          wx.canvasToTempFilePath({
+            x: 0,
+            y: 0,
+            width: 300,
+            height: 150,
+            destWidth: 300,
+            destHeight: 150,
+            canvasId: 'myCanvas',
+            success: res => {
+              wx.previewImage({
+                current: res.tempFilePath, // 当前显示图片的http链接
+                urls: [res.tempFilePath], // 需要预览的图片http链接列表
+              });
+              this.setData({
+                imgs: res.tempFilePath,
+                canvas: false
+              })
+              wx.saveImageToPhotosAlbum({
+                filePath: res.tempFilePath,
+                success(res) {
+                  wx.showModal({
+                    title: '存图成功',
+                    content: '图片成功保存到相册了，去发圈噻~',
+                    showCancel: false,
+                    confirmText: '好哒',
+                    confirmColor: '#72B9C3',
+                    success: function (res) {
+                      if (res.confirm) {
+                        console.log('用户点击确定');
+                      }
+                    }
+                  })
+                }
+              })
+            }
+          })
+        })
+      }
+    })        
+  }
+})
