@@ -1,0 +1,15 @@
+//微信公众号永久视频素材上传
+wx.chooseImage({
+    success: function (res) {
+      let description = "{\"title\":\"新手操作视频指南\",\"introduction\":\"口碑阿姨小程序新手操作视频指南\"}";
+      var tempFilePaths = res.tempFilePaths
+      wx.uploadFile({
+        url: 'https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=11_6YeYA6zh-NJDY7z-oKZucyz2w8xfgBWOfrtych5lFcuW8Dc2JP7hZ4wRQrwjexupbfxtZFJ6bsJO-kZtnT-vr7oF12pO8BzbgjfffRRYms6ZypNl2A1ncAgZh_8Q4AMQmHhIMZrQEszsNt7EOGLbABATLQ&type=video',
+        filePath: tempFilePaths[0],
+        name: 'media',
+        formData: {
+          description:description
+        }
+      })
+    }
+})
