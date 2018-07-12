@@ -590,3 +590,16 @@ function dataURLtoFile(dataurl, filename) {
 	});
 }
 console.log(dataURLtoFile(base64, 'banner'))
+//axios数据类型转换
+function obj2String(obj) {
+	var arr = [];
+	var idx = 0;
+	for(var item in obj) {
+		arr[idx++] = item+'='+obj[item]
+	}
+	var dataarr=null;
+	arr.forEach(function(datas){
+		dataarr!=null?dataarr=dataarr+'&'+datas:dataarr=datas;							
+	})						
+	return dataarr
+}
