@@ -590,16 +590,23 @@ function dataURLtoFile(dataurl, filename) {
 	});
 }
 console.log(dataURLtoFile(base64, 'banner'))
-//axios数据类型转换
-function obj2String(obj) {
-	var arr = [];
-	var idx = 0;
-	for(var item in obj) {
-		arr[idx++] = item+'='+obj[item]
-	}
-	var dataarr=null;
-	arr.forEach(function(datas){
-		dataarr!=null?dataarr=dataarr+'&'+datas:dataarr=datas;							
-	})						
-	return dataarr
-}
+//axios数据类型转换配置
+var instance = axios.create({
+	baseURL: 'http://www.baidu.com',
+	timeout: 10000,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	},
+	transformRequest: [function(data) {
+		var arr = [];
+		var idx = 0;
+		for(var item in data) {
+			arr[idx++] = item + '=' + data[item]
+		}
+		var dataarr = null;
+		arr.forEach(function(datas) {
+			dataarr != null ? dataarr = dataarr + '&' + datas : dataarr = datas;
+		})
+		return dataarr
+	}],
+});
