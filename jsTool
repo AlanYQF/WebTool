@@ -610,3 +610,6 @@ var instance = axios.create({
 		return dataarr
 	}],
 });
+//百分比逆向算法
+let scenearr=[2,3];
+let percentage = (1-((scenearr[0]-1) / scenearr[1]))*100;
