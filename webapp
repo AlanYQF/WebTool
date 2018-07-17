@@ -1,0 +1,11 @@
+//沉浸式标题栏
+"plus": {
+    "statusbar":{
+			"immersed":true
+		},
+		"launchwebview":{
+			"statusbar":{
+				"background":"#fe7474"
+			}
+		}
+}
