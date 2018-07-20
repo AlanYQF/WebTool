@@ -12,3 +12,54 @@
 //获取dom属性
 var headnode=document.getElementById('header');
 window.getComputedStyle(headnode, null).paddingTop
+//表情包选项框
+var Emoji = {
+	maps: [{
+		keys: '[):]',
+		src: 'ee_1.png'
+	}, {
+		keys: '[:D]',
+		src: 'ee_2.png'
+	}],
+	del: {
+		keys: '[del]',
+		src: 'btn_del.png'
+	}
+}
+var padding=10;  //左右间距
+var emojiwigth=52  //表情大小
+var lines=3;  //排3行
+var emojinums=35   //表情数量
+var fullweight=parseInt(document.documentElement.clientWidth)-padding;
+var fullnum=Math.floor(fullweight/emojiwigth);
+var sumarr=Math.ceil(emojinums/(fullnum*lines-1));   //最后一个放删除表情
+var emojiarr=[];				
+var i=0;
+for(var j=0;j<sumarr;j++){
+	var listnum=1;
+	emojiarr.push(new Array())
+	var muns=1;
+	var listarr=[];
+	for(;i<Emoji.maps.length;i++){
+		if(listnum>lines){
+			break;
+		}						
+		listarr.push(Emoji.maps[i]);
+		muns++;						
+		if(muns>fullnum){
+			if(listnum==lines){
+				listarr.pop();
+				listarr.push(Emoji.del);
+				i--;
+			}
+			muns=1;
+			emojiarr[j].push(listarr);
+			listarr=[];
+			listnum++;
+		}
+		if(i==Emoji.maps.length-1){
+			listarr.push(Emoji.del);
+			emojiarr[j].push(listarr);
+		}
+	}					
+}
