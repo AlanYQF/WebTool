@@ -9,3 +9,6 @@
 			}
 		}
 }
+//获取dom属性
+var headnode=document.getElementById('header');
+window.getComputedStyle(headnode, null).paddingTop
