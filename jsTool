@@ -613,3 +613,5 @@ var instance = axios.create({
 //百分比逆向算法
 let scenearr=[2,3];
 let percentage = (1-((scenearr[0]-1) / scenearr[1]))*100;
+//12小时制转24小时制
+let datas=new Date().toLocaleString('chinese',{hour12:false});
