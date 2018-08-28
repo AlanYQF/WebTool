@@ -615,3 +615,9 @@ let scenearr=[2,3];
 let percentage = (1-((scenearr[0]-1) / scenearr[1]))*100;
 //12小时制转24小时制
 let datas=new Date().toLocaleString('chinese',{hour12:false});
+//正弦曲线公式
+y = A sin(Bx + C) + D
+A 控制振幅，A 值越大，波峰和波谷越大，A 值越小，波峰和波谷越小；
+B 值会影响周期，B 值越大，那么周期越短，B 值越小，周期越长。
+C 值会影响图像左右移动，C 值为正数，图像右移，C 值为负数，图像左移。
+D 值控制上下移动。
