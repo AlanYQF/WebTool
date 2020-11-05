@@ -1,5 +1,5 @@
 let nums='05E27BAB00000100';
-for(let i=nums.length-1;i>0;i=i-2){
+for(let i=nums.length-1;i>=0;i=i-2){
   if(nums[i-1]+nums[i]!='00'){
     nums=nums.substr(0,i+1)
     break;
