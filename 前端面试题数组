@@ -1,0 +1,18 @@
+//找出数组中连续出现次数最多的数
+let names = [1,1,2,2,2,3,3,3,3,4,1,2,3,4];
+let jishu=0;
+let max=0;
+let name;
+names.reduce((pre,cur)=>{
+  if(cur == pre){
+    jishu++
+  }else{
+    jishu=0;
+  }
+  if(jishu>max){
+    max=jishu;
+    name=cur;
+  }
+  return cur;
+})
+console.log(name);
