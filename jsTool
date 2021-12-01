@@ -621,3 +621,13 @@ A 控制振幅，A 值越大，波峰和波谷越大，A 值越小，波峰和�
 B 值会影响周期，B 值越大，那么周期越短，B 值越小，周期越长。
 C 值会影响图像左右移动，C 值为正数，图像左移，C 值为负数，图像右移。
 D 值控制上下移动。
+
+//JS 在元素后面添加新的元素
+function insertAfter(newElement, targentElement) {
+        var parent = targentElement.parentNode;
+        if (parent.lastChild == targentElement) {
+            parent.appendChild(newElement);
+        } else {
+            parent.insertBefore(newElement, targentElement.nextSibling)
+        }
+ }
